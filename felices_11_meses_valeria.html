@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Felices 11 Meses, Valeria! 💕</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS para animaciones románticas -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 50%, #fbcfe8 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .font-cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Lluvia de corazones cayendo en el fondo */
+        .heart-particle {
+            position: fixed;
+            top: -10%;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+
+        /* Efecto de brillo e iluminación en las tarjetas */
+        .card-glow {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(244, 114, 182, 0.3);
+        }
+
+        .card-glow:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px -5px rgba(236, 72, 153, 0.3);
+            border-color: rgba(236, 72, 153, 0.7);
+        }
+
+        /* Animación suave para modales */
+        .modal-animate-in {
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Scrollbar personalizada estética */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fbcfe8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ec4899;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-gray-800 flex flex-col justify-between min-h-screen relative">
+
+    <!-- Fondo de Partículas / Corazones (Generados por JS) -->
+    <div id="heart-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Reproductor de Música Romántica -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="music-toggle" onclick="toggleAudio()" class="bg-white/90 backdrop-blur-md border-2 border-pink-400 text-pink-600 px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-pink-50 transition transform active:scale-95 text-sm font-semibold">
+            <i id="music-icon" class="fas fa-music animate-spin" style="animation-duration: 3s;"></i>
+            <span id="music-text">Pausar Música</span>
+        </button>
+        <!-- Audio romántico de fondo (Instrumental suave libre de derechos) -->
+        <audio id="bg-audio" loop autoplay>
+            <source src="billie.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Encabezado Principal -->
+    <header class="relative z-10 text-center pt-12 pb-6 px-4">
+        <div class="inline-block bg-pink-100/80 backdrop-blur border border-pink-300 text-pink-700 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide mb-3 shadow-sm">
+            ✨ 21 de Octubre de 2026 ✨
+        </div>
+        <h1 class="font-cursive text-5xl md:text-7xl font-bold text-pink-600 drop-shadow-md mb-2">
+            ¡Felices 11 Meses, Valeria! 💕
+        </h1>
+        <p class="text-gray-700 text-base md:text-lg max-w-xl mx-auto font-light">
+            De las pantallas de Roblox a la realidad de mi corazón. Cada segundo a tu lado ha sido un regalo maravilloso.
+        </p>
+
+        <!-- Contador de Tiempo de Amor -->
+        <div class="mt-6 inline-flex flex-wrap justify-center gap-3 md:gap-6 bg-white/70 backdrop-blur border border-pink-200 px-6 py-3 rounded-2xl shadow-md">
+            <div class="text-center px-2">
+                <span class="block text-2xl md:text-3xl font-bold text-pink-600">11</span>
+                <span class="text-xs uppercase text-gray-500 font-medium">Meses</span>
+            </div>
+            <div class="text-2xl font-light text-pink-300 flex items-center">•</div>
+            <div class="text-center px-2">
+                <span class="block text-2xl md:text-3xl font-bold text-pink-600">335</span>
+                <span class="text-xs uppercase text-gray-500 font-medium">Días aprox.</span>
+            </div>
+            <div class="text-2xl font-light text-pink-300 flex items-center">•</div>
+            <div class="text-center px-2">
+                <span class="block text-2xl md:text-3xl font-bold text-pink-600">∞</span>
+                <span class="text-xs uppercase text-gray-500 font-medium">Amor Eterno</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal: Cuadrícula de Ventanas / Tarjetas Interactivas -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 py-8 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Ventana 1: Nuestro Inicio en Roblox -->
+            <div onclick="openModal('modal-roblox')" class="card-glow rounded-3xl p-6 cursor-pointer flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 bg-pink-500 text-white rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-md group-hover:scale-110 transition duration-300">
+                        🎮
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Blox & Love 🕹️</h3>
+                    <p class="text-gray-600 text-sm line-clamp-3">
+                        ¿Quién diría que un servidor de Roblox nos uniría para siempre? Descubre cómo pasó de un juego a nuestro gran amor real...
+                    </p>
+                </div>
+                <div class="mt-6 flex items-center text-pink-600 font-semibold text-sm group-hover:translate-x-1 transition">
+                    <span>Abrir ventana</span>
+                    <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </div>
+            </div>
+
+            <!-- Ventana 2: Razones por las que te Amo -->
+            <div onclick="openModal('modal-reasons')" class="card-glow rounded-3xl p-6 cursor-pointer flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 bg-red-500 text-white rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-md group-hover:scale-110 transition duration-300">
+                        ❤️
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Por qué te Amo 💖</h3>
+                    <p class="text-gray-600 text-sm line-clamp-3">
+                        Hay un millón de motivos por los que me enamoras día a día. Hice una pequeña lista con algunas de mis razones favoritas...
+                    </p>
+                </div>
+                <div class="mt-6 flex items-center text-pink-600 font-semibold text-sm group-hover:translate-x-1 transition">
+                    <span>Abrir ventana</span>
+                    <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </div>
+            </div>
+
+            <!-- Ventana 3: Galería de Recuerdos -->
+            <div onclick="openModal('modal-gallery')" class="card-glow rounded-3xl p-6 cursor-pointer flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 bg-purple-500 text-white rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-md group-hover:scale-110 transition duration-300">
+                        📸
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Galería de Fotos 🖼️</h3>
+                    <p class="text-gray-600 text-sm line-clamp-3">
+                        Un espacio especial para nuestras fotografías y recuerdos inolvidables guardados en el corazón.
+                    </p>
+                </div>
+                <div class="mt-6 flex items-center text-pink-600 font-semibold text-sm group-hover:translate-x-1 transition">
+                    <span>Abrir ventana</span>
+                    <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </div>
+            </div>
+
+            <!-- Ventana 4: Carta para Ti -->
+            <div onclick="openModal('modal-letter')" class="card-glow rounded-3xl p-6 cursor-pointer flex flex-col justify-between group md:col-span-2 lg:col-span-2">
+                <div>
+                    <div class="w-14 h-14 bg-rose-500 text-white rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-md group-hover:scale-110 transition duration-300">
+                        ✉️
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Carta de Amor de 11 Meses 💌</h3>
+                    <p class="text-gray-600 text-sm line-clamp-2">
+                        Mi querida Valeria, aquí están plasmados mis sentimientos más sinceros. Un mensaje especial para agradecerte por iluminar cada uno de mis días.
+                    </p>
+                </div>
+                <div class="mt-6 flex items-center text-pink-600 font-semibold text-sm group-hover:translate-x-1 transition">
+                    <span>Leer carta completa</span>
+                    <i class="fas fa-envelope-open-text ml-2"></i>
+                </div>
+            </div>
+
+            <!-- Ventana 5: Línea del Tiempo -->
+            <div onclick="openModal('modal-timeline')" class="card-glow rounded-3xl p-6 cursor-pointer flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 bg-amber-500 text-white rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-md group-hover:scale-110 transition duration-300">
+                        ⏳
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Nuestros Hitos 🌟</h3>
+                    <p class="text-gray-600 text-sm line-clamp-3">
+                        Revive los momentos clave que nos trajeron hasta este hermoso día, 21 de octubre de 2026.
+                    </p>
+                </div>
+                <div class="mt-6 flex items-center text-pink-600 font-semibold text-sm group-hover:translate-x-1 transition">
+                    <span>Ver línea de tiempo</span>
+                    <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="relative z-10 text-center py-6 text-xs text-gray-600 border-t border-pink-200/60 bg-white/30 backdrop-blur-sm">
+        <p>Hecho con todo el amor del mundo para <strong>Valeria</strong> ❤️</p>
+        <p class="mt-1 opacity-75">¡Felices 11 Meses de Noviazgo! • 21/10/2026</p>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- VENTANAS MODALES EMERGENTES (POP-UPS) -->
+    <!-- ========================================== -->
+
+    <!-- Modal 1: Roblox & Amor -->
+    <div id="modal-roblox" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 relative modal-animate-in shadow-2xl border-2 border-pink-300 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-roblox')" class="absolute top-4 right-4 text-gray-400 hover:text-pink-600 text-2xl font-bold w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-50 transition">
+                &times;
+            </button>
+            <div class="text-center space-y-4">
+    <div class="text-6xl animate-bounce">🎮❤️</div>
+    <h3 class="text-2xl font-bold text-gray-800 font-romantic">Nuestra Historia en Roblox</h3>
+    <p class="text-gray-600 leading-relaxed text-sm md:text-base text-justify">
+        Quién diría que todo comenzaría en <b>Vecinos</b>, platicando por el chat de voz. Todavía recuerdo cuando te pedí tu Instagram solo para enseñarte la mochila de McDonald's que había comprado en TikTok... jajaja 🍔🎒
+    </p>
+    <p class="text-gray-600 leading-relaxed text-sm md:text-base text-justify">
+        Al día siguiente nos pusimos a jugar <b>Rieles Muertos</b> 🚂, y desde ese momento no paramos. Día tras día nos la pasamos jugando, compartiendo risas y momentos que poco a poco construyeron esta increíble historia que hoy cumple <b>11 meses</b>.
+    </p>
+    <div class="bg-pink-50 p-4 rounded-xl border border-pink-200 text-pink-700 font-medium text-sm">
+        "De todos los servidores y mapas en Roblox, mi lugar favorito en el mundo siempre será a tu lado." 💖
+    </div>
+</div>
+            <div class="mt-6 text-center">
+                <button onclick="closeModal('modal-roblox')" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-lg transition transform active:scale-95">
+                    ¡Qué hermoso recuerdo! ❤️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Razones por las que te Amo -->
+    <div id="modal-reasons" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 relative modal-animate-in shadow-2xl border-2 border-pink-300 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-reasons')" class="absolute top-4 right-4 text-gray-400 hover:text-pink-600 text-2xl font-bold w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-50 transition">
+                &times;
+            </button>
+            <div class="text-center mb-6">
+                <span class="text-4xl">💖</span>
+                <h2 class="text-2xl font-bold text-pink-600 mt-2">Razones por las que te Amo</h2>
+                <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Solo algunas de miles...</p>
+            </div>
+            <ul class="space-y-3 text-gray-700 text-sm">
+                <li class="flex items-start gap-3 bg-pink-50/70 p-3 rounded-xl border border-pink-100">
+                    <span class="text-pink-500 text-base">✨</span>
+                    <span><strong>Tu sonrisa:</strong> Tiene el poder de iluminar hasta el día más oscuro y calmar cualquier preocupación.</span>
+                </li>
+                <li class="flex items-start gap-3 bg-pink-50/70 p-3 rounded-xl border border-pink-100">
+                    <span class="text-pink-500 text-base">✨</span>
+                    <span><strong>Tu dulzura:</strong> La forma en que me tratas y me cuidas me hace sentir la persona más afortunada del mundo.</span>
+                </li>
+                <li class="flex items-start gap-3 bg-pink-50/70 p-3 rounded-xl border border-pink-100">
+                    <span class="text-pink-500 text-base">✨</span>
+                    <span><strong>Nuestras risas:</strong> Amo cada chiste interno, cada momento divertido y cómo nos entendemos casi sin hablar.</span>
+                </li>
+                <li class="flex items-start gap-3 bg-pink-50/70 p-3 rounded-xl border border-pink-100">
+                    <span class="text-pink-500 text-base">✨</span>
+                    <span><strong>Tu comprensión:</strong> Siempre estás ahí para escucharme, apoyarme y abrazarme en todo momento.</span>
+                </li>
+                <li class="flex items-start gap-3 bg-pink-50/70 p-3 rounded-xl border border-pink-100">
+                    <span class="text-pink-500 text-base">✨</span>
+                    <span><strong>Simplemente ser TÚ:</strong> Porque eres única, auténtica y la niña más coqueta que he conocido.</span>
+                </li>
+            </ul>
+            <div class="mt-6 text-center">
+                <button onclick="closeModal('modal-reasons')" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-lg transition transform active:scale-95">
+                    Te Amo Infinito 💕
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Galería de Recuerdos -->
+    <div id="modal-gallery" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 relative modal-animate-in shadow-2xl border-2 border-pink-300 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-gallery')" class="absolute top-4 right-4 text-gray-400 hover:text-pink-600 text-2xl font-bold w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-50 transition">
+                &times;
+            </button>
+            <div class="text-center mb-6">
+                <span class="text-4xl">📸</span>
+                <h2 class="text-2xl font-bold text-pink-600 mt-2">Galería de Recuerdos</h2>
+                <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Nuestros momentos capturados</p>
+            </div>
+
+            <!-- INSTRUCCIÓN DE REEMPLAZO DE IMÁGENES EN CÓDIGO: -->
+            <!-- Puedes cambiar los enlaces de src="..." abajo por las fotos reales de ustedes o sus fotos favoritas -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <!-- Foto 1 -->
+                <div class="bg-pink-50 p-3 rounded-2xl border border-pink-200 text-center">
+                    <div class="overflow-hidden rounded-xl h-44 mb-2 relative group">
+                        <!-- CAMBIAR SRC POR TU FOTO AQUÍ -->
+                        <img src="foto1.jpeg" alt="Foto 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    </div>
+                    <span class="text-xs font-medium text-pink-600">  De nuestras primeras salidas  </span>
+                    <p class="text-xs text-gray-500 mt-1">Casi nos regañan</p>
+                </div>
+
+                <!-- Foto 2 -->
+                <div class="bg-pink-50 p-3 rounded-2xl border border-pink-200 text-center">
+                    <div class="overflow-hidden rounded-xl h-44 mb-2 relative group">
+                        <!-- CAMBIAR SRC POR TU FOTO AQUÍ -->
+                        <img src="foto2.jpeg" alt="Foto 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    </div>
+                    <span class="text-xs font-medium text-pink-600">  La primera ves que nos vimos  </span>
+                    <p class="text-xs text-gray-500 mt-1">sentia nervios</p>
+                </div>
+
+                <!-- Foto 3 -->
+                <div class="bg-pink-50 p-3 rounded-2xl border border-pink-200 text-center">
+                    <div class="overflow-hidden rounded-xl h-44 mb-2 relative group">
+                        <!-- CAMBIAR SRC POR TU FOTO AQUÍ -->
+                        <img src="foto3.jpeg" alt="Foto 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    </div>
+                    <span class="text-xs font-medium text-pink-600">  Esta por que me gusto </span>
+                    <p class="text-xs text-gray-500 mt-1">Te amo chiquilla</p>
+                </div>
+
+                <!-- Foto 4 -->
+                <div class="bg-pink-50 p-3 rounded-2xl border border-pink-200 text-center">
+                    <div class="overflow-hidden rounded-xl h-44 mb-2 relative group">
+                        <!-- CAMBIAR SRC POR TU FOTO AQUÍ -->
+                        <img src="foto4.jpeg" alt="Foto 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    </div>
+                    <span class="text-xs font-medium text-pink-600"> Mira a esa coqueta </span>
+                    
+                </div>
+
+            </div>
+
+            <div class="mt-6 text-center">
+                <button onclick="closeModal('modal-gallery')" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-lg transition transform active:scale-95">
+                    Cerrar Galería ✨
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Carta Especial -->
+    <div id="modal-letter" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 md:p-8 relative modal-animate-in shadow-2xl border-2 border-pink-300 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-letter')" class="absolute top-4 right-4 text-gray-400 hover:text-pink-600 text-2xl font-bold w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-50 transition">
+                &times;
+            </button>
+            <div class="text-center mb-6">
+                <span class="text-4xl">💌</span>
+                <h2 class="font-cursive text-3xl font-bold text-pink-600 mt-1">Mi Querida Valeria</h2>
+                <p class="text-xs text-pink-400 uppercase tracking-widest font-semibold">21 de Octubre de 2026</p>
+            </div>
+
+            <div class="space-y-4 text-gray-700 leading-relaxed font-light text-sm md:text-base border-l-2 border-pink-300 pl-4 py-1 italic">
+                <p>
+                    Hoy cumplimos <strong>11 meses juntos</strong>, y no puedo evitar mirar atrás y sonreír al recordar todo lo que hemos vivido desde que nos conocimos.
+                </p>
+                <p>
+                    Jamás imaginé que una coincidencia juguetona en Roblox me llevaría a conocer a la persona más especial, tierna e increíble de este mundo. A tu lado aprendí que la distancia física no existe cuando dos corazones conectan de verdad.
+                </p>
+                <p>
+                    Gracias por cada llamada, por cada risa compartida, por los detalles que alegras en mis días y por hacerme sentir tan amado. Estos 11 meses son solo el prólogo de una larga e historia que quiero seguir construyendo contigo.
+                </p>
+                <p>
+                    Te amo infinitamente, Valeria. ¡Feliz 11° aniversario de novios!
+                </p>
+                <p class="font-cursive text-right text-xl text-pink-600 font-bold not-italic pt-2">
+                    Con todo mi amor, por siempre. ❤️
+                </p>
+            </div>
+
+            <div class="mt-6 text-center">
+                <button onclick="closeModal('modal-letter')" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-lg transition transform active:scale-95">
+                    Guardar en el corazón 💖
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Línea del Tiempo -->
+    <div id="modal-timeline" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 relative modal-animate-in shadow-2xl border-2 border-pink-300 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-timeline')" class="absolute top-4 right-4 text-gray-400 hover:text-pink-600 text-2xl font-bold w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-50 transition">
+                &times;
+            </button>
+            <div class="text-center mb-6">
+                <span class="text-4xl">⏳</span>
+                <h2 class="text-2xl font-bold text-pink-600 mt-2">Nuestra Línea del Tiempo</h2>
+                <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Nuestra aventura juntos</p>
+            </div>
+
+            <div class="relative border-l-2 border-pink-300 ml-4 space-y-6 text-sm">
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-pink-500 border-2 border-white"></span>
+                    <h4 class="font-bold text-gray-800 text-base">El Primer Encuentro 🎮</h4>
+                    <span class="text-xs text-pink-500 font-semibold">En Roblox</span>
+                    <p class="text-gray-600 mt-1">El día que coincidimos en el juego y cruzamos las primeras palabras.</p>
+                </div>
+
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-pink-500 border-2 border-white"></span>
+                    <h4 class="font-bold text-gray-800 text-base">El "Sí" Oficial 💕</h4>
+                    <span class="text-xs text-pink-500 font-semibold">Hace 11 Meses</span>
+                    <p class="text-gray-600 mt-1">Decidimos dar el paso e iniciar este hermoso noviazgo.</p>
+                </div>
+
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-pink-500 border-2 border-white"></span>
+                    <h4 class="font-bold text-gray-800 text-base">11 Meses Inolvidables ✨</h4>
+                    <span class="text-xs text-pink-500 font-semibold">21 de Octubre, 2026</span>
+                    <p class="text-gray-600 mt-1">Hoy celebramos casi un año de amor, risas y complicidad.</p>
+                </div>
+
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-pink-300 border-2 border-white"></span>
+                    <h4 class="font-bold text-gray-800 text-base">El Futuro Que Nos Espera 🔮</h4>
+                    <span class="text-xs text-pink-400 font-semibold">Por venir...</span>
+                    <p class="text-gray-600 mt-1">Muchos sueños por cumplir y recuerdos nuevos por crear juntos.</p>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <button onclick="closeModal('modal-timeline')" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-lg transition transform active:scale-95">
+                    ¡Hacia el Infinito! 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT DE INTERACCIONES Y ANIMACIONES -->
+    <!-- ========================================== -->
+    <script>
+        // --- Control de Ventanas Modales ---
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Bloquear scroll de fondo
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Restaurar scroll
+            }
+        }
+
+        // Cerrar modal si se da clic fuera del contenido del cuadro
+        window.onclick = function(event) {
+            const modals = ['modal-roblox', 'modal-reasons', 'modal-gallery', 'modal-letter', 'modal-timeline'];
+            modals.forEach(id => {
+                const modal = document.getElementById(id);
+                if (event.target === modal) {
+                    closeModal(id);
+                }
+            });
+        }
+
+        // --- Generador de Lluvia de Corazones en Fondo ---
+        function createHearts() {
+            const container = document.getElementById('heart-container');
+            const heartIcons = ['❤️', '💖', '💕', '💗', '🌸', '✨'];
+            const count = 20; // Cantidad de partículas flotantes
+
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                
+                // Propiedades aleatorias
+                const left = Math.random() * 100;
+                const size = Math.random() * 1.2 + 0.8; // tamaño
+                const duration = Math.random() * 6 + 6; // velocidad
+                const delay = Math.random() * 5;
+
+                heart.style.left = `${left}vw`;
+                heart.style.fontSize = `${size}rem`;
+                heart.style.animationDuration = `${duration}s`;
+                heart.style.animationDelay = `${delay}s`;
+
+                container.appendChild(heart);
+            }
+        }
+
+        // --- Control de Reproducción Audio ---
+        const audio = document.getElementById('bg-audio');
+        const musicText = document.getElementById('music-text');
+        const musicIcon = document.getElementById('music-icon');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                musicText.innerText = "Pausar Música";
+                musicIcon.classList.add('animate-spin');
+            } else {
+                audio.pause();
+                musicText.innerText = "Reproducir Música";
+                musicIcon.classList.remove('animate-spin');
+            }
+        }
+
+        // Intentar autoejecutar música al interactuar si el navegador bloquea autoplay
+        document.addEventListener('click', function initAudio() {
+            if (audio.paused) {
+                audio.play().catch(() => {});
+            }
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
+
+        // Inicializar animación al cargar página
+        window.onload = function() {
+            createHearts();
+        };
+    </script>
+</body>
+</html>
